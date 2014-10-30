@@ -1,6 +1,17 @@
 Changelog
 =========
 
+dev-master
+----------
+
+### Features
+
+- Immediately fail when trying to delete a node which is referenced
+
+### Bug Fixes
+
+- Cannot `node:remove` by UUID
+
 alpha-6
 -------
 

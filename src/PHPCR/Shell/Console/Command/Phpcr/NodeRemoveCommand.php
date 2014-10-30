@@ -35,7 +35,22 @@ HERE
             );
         }
 
-        $session->removeItem($targetPath);
+        $references = $targetNode->getReferences();
+
+        if (count($references) > 0) {
+            $paths = array();
+            foreach ($references as $reference) {
+                $paths[] = $reference->getPath();
+            }
+
+            throw new \InvalidArgumentException(sprintf(
+                'The node "%s" is referenced by the following properties: "%s"',
+                $targetNode->getPath(),
+                implode('", "', $paths)
+            ));
+        }
+
+        $targetNode->remove();
 
         // if we deleted the current path, switch back to the parent node
         if ($currentPath == $session->getAbsPath($targetPath)) {
